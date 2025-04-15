@@ -19,5 +19,6 @@ public class Invitation {
 
     private String token;
     private String email;
+    private String userName;
     private Long projectId;
 }

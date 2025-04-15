@@ -10,7 +10,6 @@ import com.PMS.model.Chat;
 import com.PMS.model.Message;
 import com.PMS.model.User;
 import com.PMS.repository.MessageRepository;
-import com.PMS.repository.ProjectRepository;
 import com.PMS.repository.UserRepository;
 
 @Service
@@ -46,8 +45,13 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public List<Message> getMessagesByProjectId(Long projectId) throws Exception {
         Chat chat = projectService.getChatByProjectId(projectId);
-        List<Message> findByChatIdOrderByCreatedAtAsc = messageRepository.findByChatIdOrderByCreatedAtAsc(chat.getId());
-        return findByChatIdOrderByCreatedAtAsc;
+        List<Message> messages = messageRepository.findByChatIdOrderByCreatedAtAsc(chat.getId());
+        return messages;
     }
 
+    @Override
+    public void saveMessage(Message message) {
+        message.setCreatedAt(LocalDateTime.now());
+        messageRepository.save(message);
+    }
 }

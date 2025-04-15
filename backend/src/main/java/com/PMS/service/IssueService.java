@@ -1,7 +1,6 @@
 package com.PMS.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.PMS.model.Issue;
 import com.PMS.model.User;

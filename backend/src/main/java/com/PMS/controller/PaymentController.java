@@ -19,26 +19,35 @@ import com.razorpay.PaymentLink;
 import com.razorpay.RazorpayClient;
 
 @RestController
-@RequestMapping("/api/payment")
+@RequestMapping("/api/payments")
 public class PaymentController {
-    @Value("${razorpay.api.key}")
+    @Value("rzp_test_XjOflk1zF6A2EI")
     private String apiKey;
 
-    @Value("${razorpay.api.secret}")
+    @Value("qulLVakgpg3eFwEBZaRL4oiS")
     private String apiSecret;
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("{planType}")
+    @PostMapping("/{planType}")
     public ResponseEntity<PaymentLinkResponse> createPaymentLink(@PathVariable PlanType planType,
             @RequestHeader("Authorization") String jwt) throws Exception {
         User user = userService.findUserProfileByJwt(jwt);
-        int amount = 799 * 100;
-        if (planType.equals(PlanType.ANNUALLY)) {
-            amount = amount * 12;
-            amount = (int) (amount * 0.7);
+        // if (planType.equals(PlanType.FREE)) {
+        // user.setPlanType(PlanType.FREE);
+        // userService.updateUser(user);
+        // }
+        int amount = 0;
+
+        if (planType.equals(PlanType.WEEKLY)) {
+            amount = 249 * 100;
+        } else if (planType.equals(PlanType.MONTHLY)) {
+            amount = 799 * 100;
+        } else if (planType.equals(PlanType.ANNUALLY)) {
+            amount = 6711 * 100;
         }
+
         RazorpayClient razorpay = new RazorpayClient(apiKey, apiSecret);
         JSONObject paymentLinkRequest = new JSONObject();
         paymentLinkRequest.put("amount", amount);
@@ -53,7 +62,7 @@ public class PaymentController {
         notify.put("email", true);
         paymentLinkRequest.put("notify", notify);
 
-        paymentLinkRequest.put("callback_url", "http://localhost:5173/upgrade_plan/success?planType" + planType);
+        paymentLinkRequest.put("callback_url", "http://localhost:5173/upgrade_plan/success?planType=" + planType);
 
         PaymentLink payment = razorpay.paymentLink.create(paymentLinkRequest);
 

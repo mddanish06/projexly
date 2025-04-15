@@ -44,5 +44,4 @@ public class UserServiceImpl implements UserService {
         user.setProjectSize(user.getProjectSize()+number);
         return userRepository.save(user);
     }
-
 }

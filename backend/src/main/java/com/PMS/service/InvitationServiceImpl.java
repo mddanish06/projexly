@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.PMS.model.Invitation;
+import com.PMS.model.User;
 import com.PMS.repository.InvitationRepository;
+import com.PMS.repository.UserRepository;
 
 import jakarta.mail.MessagingException;
 
@@ -19,6 +21,9 @@ public class InvitationServiceImpl implements InvitationService {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
     public void sendInvitation(String email, Long projectId) throws MessagingException {
         String invitationToken = UUID.randomUUID().toString();
@@ -27,18 +32,20 @@ public class InvitationServiceImpl implements InvitationService {
         invitation.setEmail(email);
         invitation.setProjectId(projectId);
         invitation.setToken(invitationToken);
-
         invitationRepository.save(invitation);
 
+        User recipient = userRepository.findByEmail(email);
+        String userName = (recipient != null && recipient.getFullName() != null) ? recipient.getFullName() : email;
+
         String invitationLink = "http://localhost:5173/accept_invitation?token=" + invitationToken;
-        emailService.sendEmailWithToken(email, invitationLink);
-        
+        emailService.sendEmailWithToken(email, userName, invitationLink);
+
     }
 
     @Override
     public Invitation acceptInvitation(String token, Long userId) throws Exception {
         Invitation invitation = invitationRepository.findByToken(token);
-        if(invitation == null){
+        if (invitation == null) {
             throw new Exception("Invalid invitaion token");
         }
         return invitation;
@@ -56,5 +63,5 @@ public class InvitationServiceImpl implements InvitationService {
         Invitation invitation = invitationRepository.findByToken(token);
         invitationRepository.delete(invitation);
     }
-    
+
 }

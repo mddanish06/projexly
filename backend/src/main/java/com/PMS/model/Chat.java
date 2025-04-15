@@ -26,6 +26,8 @@ public class Chat {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    // private Long projectId; //added
+
     private String name;
 
     @OneToOne

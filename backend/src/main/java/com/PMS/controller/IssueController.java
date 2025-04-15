@@ -3,7 +3,6 @@ package com.PMS.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +18,9 @@ import com.PMS.model.Issue;
 import com.PMS.model.IssueDTO;
 import com.PMS.model.User;
 import com.PMS.request.IssueRequest;
-import com.PMS.response.AuthResponse;
 import com.PMS.response.MessageResponse;
 import com.PMS.service.IssueService;
 import com.PMS.service.UserService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -48,7 +45,7 @@ public class IssueController {
     @PostMapping
     public ResponseEntity<IssueDTO> createIssue(@RequestBody IssueRequest issue, @RequestHeader("Authorization") String token) throws Exception {
         User tokenUser = userService.findUserProfileByJwt(token);
-        User user = userService.findUserById(tokenUser.getId());
+        // User user = userService.findUserById(tokenUser.getId());
 
         Issue createdIssue = issueService.createIssue(issue, tokenUser);
         IssueDTO issueDTO = new IssueDTO();

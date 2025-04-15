@@ -12,8 +12,6 @@ import com.PMS.repository.SubscriptionRepository;
 
 @Service
 public class SubscriptionServiceImpl implements SubscriptionService {
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private SubscriptionRepository subscriptionRepository;
@@ -24,7 +22,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         subscription.setUser(user);
         subscription.setSubscriptionStartDate(LocalDate.now());
         subscription.setSubscriptionEndDate(LocalDate.now().plusMonths(12));
-        subscription.setPlanType(PlanType.FREE);
+        subscription.setPlanType(PlanType.WEEKLY);
         subscription.setValid(true);
 
         return subscriptionRepository.save(subscription);  
@@ -34,7 +32,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public Subscription getUserSubscription(Long userId) throws Exception {
         Subscription subscription = subscriptionRepository.findByUserId(userId);
         if(!isValid(subscription)){
-            subscription.setPlanType(PlanType.FREE);
+            subscription.setPlanType(PlanType.WEEKLY);
             subscription.setSubscriptionEndDate(LocalDate.now().plusMonths(12));
             subscription.setSubscriptionStartDate(LocalDate.now());
         }
@@ -56,7 +54,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     public boolean isValid(Subscription subscription) {
-        if(subscription.getPlanType().equals(PlanType.FREE)){
+        if(subscription.getPlanType().equals(PlanType.WEEKLY)){
             return true;
         }
         LocalDate endDate = subscription.getSubscriptionEndDate();

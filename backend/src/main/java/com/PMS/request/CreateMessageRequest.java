@@ -8,3 +8,4 @@ public class CreateMessageRequest {
     private String content;
     private Long projectId;
 }
+ 

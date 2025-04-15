@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,11 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.PMS.model.Chat;
 import com.PMS.model.Message;
-import com.PMS.model.User;
 import com.PMS.request.CreateMessageRequest;
 import com.PMS.service.MessageService;
 import com.PMS.service.ProjectService;
-import com.PMS.service.UserService;
 
 @RestController
 @RequestMapping("/api/messages")
@@ -26,14 +26,11 @@ public class MessageController {
     private MessageService messageService;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private ProjectService projectService;
 
     @PostMapping("/send")
     public ResponseEntity<Message> sendMessage(@RequestBody CreateMessageRequest request) throws Exception {
-        User user = userService.findUserById(request.getSenderId());
+        // User user = userService.findUserById(request.getSenderId());
     
         Chat chats = projectService.getProjectById(request.getProjectId()).getChat();
         if(chats == null) {
@@ -50,4 +47,12 @@ public class MessageController {
         
         return ResponseEntity.ok(messages);
     }
+
+    // @MessageMapping("/chat.send")
+    // @SendTo("/topic/public")
+    // public Message sendMessage(Message message) {
+    //     messageService.saveMessage(message);
+    //     return message;
+    // }
 }
+ 

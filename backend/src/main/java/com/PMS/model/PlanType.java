@@ -1,7 +1,7 @@
 package com.PMS.model;
 
 public enum PlanType {
-    FREE,
+    WEEKLY,
     MONTHLY,
     ANNUALLY
 }
