@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
@@ -18,7 +19,7 @@ import lombok.Data;
 @Data
 public class Issue {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
@@ -30,6 +31,7 @@ public class Issue {
     private List<String> tags = new ArrayList<>();
 
     @ManyToOne
+    @JoinColumn(name = "assignee_id")
     private User assignee;
 
     @JsonIgnore
