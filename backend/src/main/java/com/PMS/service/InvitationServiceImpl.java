@@ -37,7 +37,7 @@ public class InvitationServiceImpl implements InvitationService {
         User recipient = userRepository.findByEmail(email);
         String userName = (recipient != null && recipient.getFullName() != null) ? recipient.getFullName() : email;
 
-        String invitationLink = "http://localhost:5173/accept_invitation?token=" + invitationToken;
+        String invitationLink = "http://projexly-production-d1f5.up.railway.app/accept_invitation?token=" + invitationToken;
         emailService.sendEmailWithToken(email, userName, invitationLink);
 
     }

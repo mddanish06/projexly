@@ -41,7 +41,7 @@ public class AppConfig {
                 cfg.setAllowedOrigins(Arrays.asList(
                         "http://localhost:3000",
                         "http://localhost:5173",
-                        "http://localhost:4200"));
+                        "http://projexly-production-d1f5.up.railway.app"));
                 cfg.setAllowedMethods(Collections.singletonList("*"));
                 cfg.setAllowCredentials(true);
                 cfg.setAllowedHeaders(Collections.singletonList("*"));
