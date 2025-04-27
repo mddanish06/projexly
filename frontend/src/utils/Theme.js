@@ -1,0 +1,37 @@
+export const darkTheme = {
+  bg: "#15171E",
+  bgLighter: "#1C1E27",
+  itemHover: "#3A3C45",
+  itemText: "#DADEDF",
+  primary: "#0099ff",
+  bgDark: "#15171E",
+  text: "#F2F3F4",
+  textSoft: "#C1C7C9",
+  soft: "#373D3F",
+  soft2: "#8C979A",
+  card: "#1C1E27",
+  lightAdd: "99",
+  yellow: "#fccf03",
+  green: "#03fc45",
+  pink: "#fc036b",
+  recieve_message: "#1a1826",
+  chat_background: "#100f17",
+  send_message: "#4f34ad",
+  contact_background: "#151a21",
+};
+
+export const tagColors = [
+  "#FF69B4",
+  "#9932CC",
+  "#FFA07A",
+  "#FFD700",
+  "#90EE90",
+  "#20B2AA",
+  "#AFEEEE",
+  "#FFF0F5",
+  "#B5E4CA",
+  "#CABDFF",
+  "#B1E5FC",
+  "#FFBC99",
+  
+]
