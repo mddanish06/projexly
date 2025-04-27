@@ -3,7 +3,7 @@ import Benefits from "./components/Benifits";
 import Features from "./components/Features";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
-import Navbar from "./components/Navbar";
+import NavBar from "./components/NavBar";
 import Team from "./components/Team";
 
 const Body = styled.div`
@@ -56,7 +56,7 @@ const Home = () => {
     <Body>
       <Container>
         <Top>
-          <Navbar />
+          <NavBar />
           <Hero />
         </Top>
         <Content>
