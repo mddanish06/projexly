@@ -34,15 +34,20 @@ const Navbar = () => {
   return (
     <div className="border-b py-4 px-5 flex items-center justify-between ">
       <div className="flex items-center gap-3">
-        <p
+        <div
           onClick={() => navigate("/")}
-          className="cursor-pointer text-[20px] font-bold"
+          className="flex cursor-pointer text-[20px] font-bold"
           style={{
             color: theme.primary,
           }}
         >
+          <img
+            src="/pms.png"
+            alt="logo"
+            className="w-[35px] h-[35px] object-cover"
+          />
           Projexly
-        </p>
+        </div>
         <Dialog>
           <DialogTrigger>
             <Button

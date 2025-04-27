@@ -33,3 +33,6 @@ build/
 .vscode/
 
 frontend/node_modules/
+backend/application.properties
+backend/application-prod.properties
+backend/application-dev.properties

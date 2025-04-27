@@ -1,6 +1,7 @@
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import pms from "../../../../public/pms.png";
 
 const Container = styled.div`
   width: 90%;
@@ -15,9 +16,13 @@ const Container = styled.div`
   }
 `;
 const Logo = styled.h1`
+  display: flex;
   font-weight: 600;
   font-size: 20px;
   color: ${({ theme }) => theme.primary};
+`;
+const Image = styled.img`
+  height: 40px;
 `;
 
 const Menu = styled.ul`
@@ -65,7 +70,10 @@ const NavBar = () => {
   const navigate = useNavigate();
   return (
     <Container>
-      <Logo>PROJEXLY</Logo>
+      <Logo>
+        <Image src={pms} />
+        PROJEXLY
+      </Logo>
       <Menu>
         <MenuItem href="#home">Home</MenuItem>
         <MenuItem href="#features">Features</MenuItem>
