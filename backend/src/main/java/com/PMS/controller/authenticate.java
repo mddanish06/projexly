@@ -8,6 +8,6 @@ public class authenticate {
 
     @GetMapping("/")
     public String home() {
-        return "Backend is running successfully!";
+        return "Backend is running successfully...";
     }
 }
